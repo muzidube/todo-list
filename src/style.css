@@ -75,9 +75,61 @@ body {
 }
 
 .leftMenu {
-    display: none;
+    display: grid;
     background: red;
-    width: 0px;
+    width: 350px;
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+}
+
+.categoryIcon {
+    height: 24px;
+    width: 24px;
+}
+
+.categoryDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categoryDiv:hover {
+
+}
+
+.categoryInnerDiv {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 30px 1fr;
+    grid-gap: 1rem;
+}
+
+.active {
+    animation: active 0.3s forwards;
+    -webkit-animation: active 0.3s forwards;
+}
+
+.inactive {
+    animation: inactive 0.3s forwards;
+    -webkit-animation: inactive 0.3s forwards;
+}
+    
+@keyframes active {
+    100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes active {
+    100% { -webkit-transform: translateX(0%); }
+}
+    
+@keyframes inactive {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+
+@-webkit-keyframes inactive {
+    0% { -webkit-transform: translateX(0%); }
+    100% { -webkit-transform: translateX(-100%); }
 }
 
 .mainSection {
@@ -99,14 +151,9 @@ body {
     width: 24px;
 }
 
-.leftMenu.active {
-    display: grid;
-    width: 100%;
-}
-
 .appContent.active {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 0 1fr;
 }
 
 .mainInbox.active {
@@ -126,5 +173,8 @@ body {
 menu <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 plus <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 bell <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-profile <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
+profile <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+inbox <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+upcoming <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+today <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
 

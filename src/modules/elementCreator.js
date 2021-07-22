@@ -7,7 +7,10 @@ function HTMLcreator(name, type, ...class1) {
 
 }
 
-import logo from '../components/images/correction.svg'
+import logo from '../components/images/correction.svg';
+import inbox from '../components/images/inbox.svg';
+import today from '../components/images/clock.svg';
+import upcoming from '../components/images/calendar.svg';
 
 // HTMLcreator();
 
@@ -43,17 +46,26 @@ const leftMenu = HTMLcreator('leftMenu', 'div', 'active');
 const leftContent = HTMLcreator('leftContent', 'div');
 const leftModules = HTMLcreator('leftModules', 'div');
 const leftCategories = HTMLcreator('leftCategories', 'div');
-const leftInbox = HTMLcreator('leftInbox', 'div');
+const leftInbox = HTMLcreator('leftInbox', 'div', 'categoryDiv');
+const inboxInnerDiv = HTMLcreator('inboxInnerDiv', 'div', 'categoryInnerDiv')
 const inboxIcon = HTMLcreator('inboxIcon', 'img', 'categoryIcon');
+inboxIcon.setAttribute('src', inbox);
 const inboxText = HTMLcreator('inboxText', 'p', 'categoryText');
+inboxText.textContent = 'Inbox';
 const inboxNum = HTMLcreator('inboxNum', 'p', 'categoryNum');
-const leftToday = HTMLcreator('leftToday', 'div');
+const leftToday = HTMLcreator('leftToday', 'div', 'categoryDiv');
+const todayInnerDiv = HTMLcreator('todayInnerDiv', 'div', 'categoryInnerDiv')
 const todayIcon = HTMLcreator('todayIcon', 'img', 'categoryIcon');
+todayIcon.setAttribute('src', today);
 const todayText = HTMLcreator('todayText', 'p', 'categoryText');
+todayText.textContent = 'Today';
 const todayNum = HTMLcreator('todayNum', 'p', 'categoryNum');
-const leftUpcoming = HTMLcreator('leftUpcoming', 'div');
+const leftUpcoming = HTMLcreator('leftUpcoming', 'div', 'categoryDiv');
+const upcomingInnerDiv = HTMLcreator('upcomingInnerDiv', 'div', 'categoryInnerDiv')
 const upcomingIcon = HTMLcreator('upcomingIcon', 'img', 'categoryIcon');
+upcomingIcon.setAttribute('src', upcoming);
 const upcomingText = HTMLcreator('upcomingText', 'p', 'categoryText');
+upcomingText.textContent = 'Upcoming';
 const upcomingNum = HTMLcreator('upcomingNum', 'p', 'categoryNum');
 const projectCategory = HTMLcreator('projectCategory', 'div');
 const projectMain = HTMLcreator('projectMain', 'div');
@@ -70,9 +82,12 @@ leftMenu.append(leftContent);
 leftContent.append(leftModules);
 leftModules.append(leftCategories, projectCategory);
 leftCategories.append(leftInbox, leftToday, leftUpcoming);
-leftInbox.append(inboxIcon, inboxText, inboxNum);
-leftToday.append(todayIcon, todayText, todayNum);
-leftUpcoming.append(upcomingIcon, upcomingText, upcomingNum);
+leftInbox.append(inboxInnerDiv, inboxNum);
+inboxInnerDiv.append(inboxIcon, inboxText);
+leftToday.append(todayInnerDiv, todayNum);
+todayInnerDiv.append(todayIcon, todayText);
+leftUpcoming.append(upcomingInnerDiv, upcomingNum);
+upcomingInnerDiv.append(upcomingIcon, upcomingText);
 projectCategory.append(projectMain);
 projectMain.append(projectItem);
 mainSection.append(mainContent);
