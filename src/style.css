@@ -1,3 +1,35 @@
+@font-face {
+    font-family: 'Dosis-ExtraLight';
+    src: url("./components/fonts/Dosis-ExtraLight.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Dosis-Light';
+    src: url("./components/fonts/Dosis-Light.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Dosis-Regular';
+    src: url("./components/fonts/Dosis-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Dosis-Medium';
+    src: url("./components/fonts/Dosis-Medium.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 html {
     box-sizing: border-box;
 }
@@ -12,6 +44,7 @@ body {
     margin: 0;
     padding: 0;
     border: 0;
+    font-family: 'Dosis-Light';
 
 }
 
@@ -71,7 +104,13 @@ body {
 .appContent {
     display: grid;
     height: 100vh;
+    width: 100vw;
     grid-template-columns: 350px 1fr;
+}
+
+.appContent.active {
+    display: grid;
+    grid-template-columns: 0 1fr;
 }
 
 .leftMenu {
@@ -82,15 +121,35 @@ body {
     -webkit-transform: translateX(-100%);
 }
 
+.leftMenu.active {
+    display: grid;
+    background: red;
+    width: 350px;
+    transform: translateX(0%);
+    -webkit-transform: translateX(0%);
+}
+
+.leftContent {
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-right:2rem;
+}
+
 .categoryIcon {
     height: 24px;
     width: 24px;
+}
+
+.projectIcon {
+    height: 15px;
+    width: 15px;
 }
 
 .categoryDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .categoryDiv:hover {
@@ -104,30 +163,95 @@ body {
     grid-gap: 1rem;
 }
 
-.active {
-    animation: active 0.3s forwards;
-    -webkit-animation: active 0.3s forwards;
+.projectMain {
+    display: grid;
 }
 
-.inactive {
-    animation: inactive 0.3s forwards;
-    -webkit-animation: inactive 0.3s forwards;
+.projectFormDiv {
+    display: none;
+    position: fixed;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    border: 1px solid #7474749a;
+    background-color: #ffffff;
+    border-radius: 5px;
+    z-index: 9;
+}
+
+.projectForm {
+    display: grid;
+    border-radius: 8px;
+    max-width: 300px;
+    padding: 10px;
+}
+
+.formInput {
+    height: 25px;
+    margin-top: 5px;
+    margin-bottom: 2rem;
+    border: 1px solid rgb(205, 201, 201);
+    border-radius: 3px;
+}
+
+.formInput:focus {
+    outline: none;
+    background-color: #e9e7e7;
+}
+.formBtnsDiv {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.projectFormBtns {
+    height: 30px;
+    width: 50px;
+    padding: 5px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.closeBtn {
+    margin-right: 10px;
+    border: 1px solid #9b9a9a9a;
+    border-radius: 4px;
+    background-color: #f7f6f6e7;
+}
+
+.addBtn {
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    background-color: #da1727e7;
+    color: #ffffff;
+}
+.formHeader {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+}
+.slide-in {
+    animation: slide-in 0.3s forwards;
+    -webkit-animation: slide-in 0.3s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.3s forwards;
+    -webkit-animation: slide-out 0.3s forwards;
 }
     
-@keyframes active {
+@keyframes slide-in {
     100% { transform: translateX(0%); }
 }
 
-@-webkit-keyframes active {
+@-webkit-keyframes slide-in {
     100% { -webkit-transform: translateX(0%); }
 }
     
-@keyframes inactive {
+@keyframes slide-out {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-100%); }
 }
 
-@-webkit-keyframes inactive {
+@-webkit-keyframes slide-out {
     0% { -webkit-transform: translateX(0%); }
     100% { -webkit-transform: translateX(-100%); }
 }
@@ -151,11 +275,6 @@ body {
     width: 24px;
 }
 
-.appContent.active {
-    display: grid;
-    grid-template-columns: 0 1fr;
-}
-
 .mainInbox.active {
     display: grid;
 }
@@ -176,5 +295,6 @@ bell <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" t
 profile <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 inbox <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 upcoming <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-today <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
+today <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+right arrow <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
 
