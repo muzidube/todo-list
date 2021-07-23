@@ -9,14 +9,24 @@ import {
     projectItem,
     addProjectIcon,
     projectFormDiv,
+    taskFormDiv,
     closeBtn,
     addBtn,
+    closeBtn1,
+    addBtn1,
     leftMenu,
+    formInput,
+    taskFormInput1,
+    taskFormInput2,
 } from './elementCreator';
+
 
 menuBtn.addEventListener('click', leftMenuActive);
 addProjectIcon.addEventListener('click', projectItemPopup);
 closeBtn.addEventListener('click', projectItemPopupHide);
+addBtn.addEventListener('click', addProjectItemPopupHide);
+closeBtn1.addEventListener('click', taskItemPopupHide);
+addBtn1.addEventListener('click', taskItemPopupHide);
 
 
 function leftMenuActive() {
@@ -40,6 +50,7 @@ function leftMenuActive() {
 
 function projectItemPopup() {
     let isOpen = projectFormDiv.style.display = "block";
+    formInput.value = '';
 
     if (isOpen == true) {
         projectFormDiv.style.display = "none";
@@ -48,9 +59,32 @@ function projectItemPopup() {
     }
 }
 
+
 function projectItemPopupHide() {
     projectFormDiv.style.display = 'none';
 }
+
+function addProjectItemPopupHide() {
+    projectFormDiv.style.display = 'none';
+    hideOtherProjects()
+}
+
+function taskItemPopup() {
+    let isOpen = taskFormDiv.style.display = "block";
+    taskFormInput1.value = '';
+    taskFormInput2.value = '';
+
+    if (isOpen == true) {
+        taskFormDiv.style.display = "none";
+    } else {
+        taskFormDiv.style.display = "block";
+    }
+}
+
+function taskItemPopupHide() {
+    taskFormDiv.style.display = 'none';
+}
+
 
 
 function createProjectItem() {
@@ -59,4 +93,13 @@ function createProjectItem() {
 
 function addProjectItem() {
 
+}
+
+function hideOtherProjects() {
+    document.querySelectorAll('.projectWrapper').classList.remove('active');
+    document.querySelector(formInput.value).classList.add('active');
+}
+
+export {
+    taskItemPopup
 }

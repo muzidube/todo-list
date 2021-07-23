@@ -145,6 +145,15 @@ body {
     width: 15px;
 }
 
+.projectArrow.arrowDown {
+    transform: rotate(90deg);
+}
+
+.leftProjectIcon {
+    height: 13px;
+    width: 13px;
+}
+
 .categoryDiv {
     display: flex;
     justify-content: space-between;
@@ -166,6 +175,46 @@ body {
 .projectMain {
     display: grid;
 }
+
+.projectInnerDiv {
+    width: 280px;
+}
+
+.projectItems {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    perspective: 1000px;
+    display: block;
+}
+
+.projectItems-6 {
+    animation: growDown 300ms ease-in-out forwards;
+    transform-origin: top center;
+}
+
+@keyframes growDown {
+
+    0% {
+  
+      transform: scaleY(0)
+  
+    }
+  
+    80% {
+  
+      transform: scaleY(1.1)
+  
+    }
+  
+    100% {
+  
+      transform: scaleY(1)
+  
+    }
+  
+  }
+
 
 .projectFormDiv {
     display: none;
@@ -192,6 +241,8 @@ body {
     margin-bottom: 2rem;
     border: 1px solid rgb(205, 201, 201);
     border-radius: 3px;
+    font-size: 11px;
+    align-content: flex-start;
 }
 
 .formInput:focus {
@@ -224,10 +275,46 @@ body {
     background-color: #da1727e7;
     color: #ffffff;
 }
+
 .formHeader {
     border-bottom: 1px solid black;
     padding-bottom: 10px;
 }
+
+.taskFormHeader {
+    padding-bottom: 10px;
+}
+
+.taskFormDiv {
+    display: none;
+}
+
+.taskFormInput2 {
+    height: 60px;
+}
+
+.mainContent {
+    height: 100%;
+    width: 100%;
+    padding: 0 2rem 2rem 2rem;
+}
+
+.projectWrapper {
+    display: none;
+}
+
+.projectWrapper.activeProject {
+    display: block;
+}
+
+.innerList {
+    display: none
+}
+
+.innerList.activeProject {
+    display: block;
+}
+
 .slide-in {
     animation: slide-in 0.3s forwards;
     -webkit-animation: slide-in 0.3s forwards;
@@ -296,5 +383,6 @@ profile <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfe
 inbox <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 upcoming <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 today <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-right arrow <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
+right arrow <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+dot <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
 

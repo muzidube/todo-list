@@ -1,84 +1,93 @@
-function projectCreator(title) {
-    const projectWrapper = document.createElement('div')
-    projectWrapper.setAttribute('id', 'projectWrapper');
-    projectWrapper.setAttribute('class', 'projectWrapper');
+import {
+    headerLogoLink,
+    menuBtn,
+    appContent,
+    mainInbox,
+    mainToday,
+    mainUpcoming,
+    projectMain,
+    projectItem,
+    addProjectIcon,
+    projectFormDiv,
+    closeBtn,
+    addBtn,
+    addBtn1,
+    formInput,
+    taskFormInput1,
+    taskFormInput2,
+    leftMenu,
+} from './elementCreator';
 
-    const projectHeader = document.createElement('header');
-    projectHeader.setAttribute('id', 'projectHeader');
-    projectHeader.setAttribute('class', 'projectHeader');
+import {HTMLcreator as HTMLcreator2} from './elementCreator';
+import circle from '../components/images/circle.svg';
+import plus from '../components/images/plus.svg';
+import {taskItemPopup} from './uiController';
 
-    const projectHeaderContent = document.createElement('div');
-    projectHeaderContent.setAttribute('id', 'projectHeaderContent');
-    projectHeaderContent.setAttribute('class', 'projectHeaderContent');
+addBtn.addEventListener('click', function() {
+    let activeProjects = document.getElementsByClassName("activeProject");
+    while (activeProjects.length)
+    activeProjects[0].classList.remove("activeProject");
 
-    const projectHeaderTitle = document.createElement('h1');
-    projectHeaderTitle.setAttribute('id', 'projectHeaderTitle');
-    projectHeaderTitle.setAttribute('class', 'projectHeaderTitle');
-    projectHeaderTitle.textContent = title
+    const leftProject = HTMLcreator2('leftProject', 'div', 'leftProjectDiv', 'categoryDiv', formInput.value);
+    leftProject.addEventListener('click', function () {
+        let activeProjects = document.getElementsByClassName("activeProject");
+        while (activeProjects.length)
+        activeProjects[0].classList.remove("activeProject");
 
-    const projectHeaderActions = document.createElement('div');
-    projectHeaderActions.setAttribute('id', 'projectHeaderActions');
-    projectHeaderActions.setAttribute('class', 'projectHeaderActions');
+        if (projectWrapper.classList.contains(leftProject.textContent)) {
+            projectWrapper.classList.add('activeProject');
+            innerList.classList.add('activeProject');
+        }
+    })
+    const leftProjectInner = HTMLcreator2('leftProjectInner', 'div', 'leftProjectInner', 'categoryInnerDiv')
+    const leftProjectIcon = HTMLcreator2('leftProjectIcon', 'img', 'leftProjectIcon');
+    leftProjectIcon.setAttribute('src', circle);
+    const leftProjectText = HTMLcreator2('leftProjectText', 'p', 'leftProjectText');
+    leftProjectText.textContent = formInput.value;
+    const leftProjectNum = HTMLcreator2('leftProjectNum', 'p', 'leftProjectNum');
 
-    projectWrapper.append(projectHeader);
+    leftProject.append(leftProjectInner, leftProjectNum);
+    leftProjectInner.append(leftProjectIcon, leftProjectText);
+    document.querySelector('.projectItems').appendChild(leftProject);
+
+    const projectWrapper = HTMLcreator2('projectWrapper', 'div', 'activeProject', formInput.value);
+    const projectHeader = HTMLcreator2('projectHeader', 'div');
+    const projectHeaderContent = HTMLcreator2('projectHeaderContent', 'div', 'categoryDiv');
+    const projectHeaderTitle = HTMLcreator2('projectHeaderTitle', 'h1');
+    projectHeaderTitle.textContent = formInput.value;
+    const projectHeaderActions = HTMLcreator2('projectHeaderActions', 'div');
+    const addTaskIcon = HTMLcreator('addTaskIcon', 'img', 'categoryIcon', 'projectIcon');
+    addTaskIcon.addEventListener('click', taskItemPopup);
+    addTaskIcon.setAttribute('src', plus);
+
+    const projectDivBox = HTMLcreator2('projectDivBox', 'div');
+    const itemOuterListContainer = HTMLcreator2('itemOuterListContainer', 'div');
+    const itemOuterList = HTMLcreator2('itemOuterList', 'ul');
+
+
+    const itemOuterListItem = HTMLcreator2('itemOuterListItem', 'li');
+    const outerItemSection = HTMLcreator2('outerItemSection', 'section');
+    const outerItemBtn = HTMLcreator2('outerItemBtn', 'button');
+    const innerListContainer = HTMLcreator2('innerListContainer', 'div');
+    const innerList = HTMLcreator2('innerList', 'ul', 'activeProject', formInput.value);
+
+    projectWrapper.append(projectHeader, projectDivBox);
     projectHeader.append(projectHeaderContent);
     projectHeaderContent.append(projectHeaderTitle, projectHeaderActions);
-
-    return projectWrapper;
-
-}
-
-function ItemContainer() {
-
-    const projectDivBox = document.createElement('div');
-    projectDivBox.setAttribute('id', 'projectDivBox');
-    projectDivBox.setAttribute('class', 'projectDivBox');
-
-    const itemOuterListContainer = document.createElement('div');
-    itemOuterListContainer.setAttribute('id', 'itemOuterListContainer');
-    itemOuterListContainer.setAttribute('class', 'itemOuterListContainer');
-
-    const itemOuterList = document.createElement('ul');
-    itemOuterList.setAttribute('id', 'itemOuterList');
-    itemOuterList.setAttribute('class', 'itemOuterList');
-
+    projectHeaderActions.append(addTaskIcon);
     projectDivBox.append(itemOuterListContainer);
     itemOuterListContainer.append(itemOuterList);
-
-    return projectDivBox;
-}
-
-function outerItemContainer(itemName, itemDesc) {
-
-    const itemOuterListItem = document.createElement('li');
-    itemOuterListItem.setAttribute('id', 'itemOuterListItem');
-    itemOuterListItem.setAttribute('class', 'itemOuterListItem');
-
-    const outerItemSection = document.createElement('section');
-    outerItemSection.setAttribute('id', 'outerItemSection');
-    outerItemSection.setAttribute('class', 'outerItemSection');
-
-    const outerItemBtn = document.createElement('button');
-    outerItemBtn.setAttribute('id', 'outerItemBtn');
-    outerItemBtn.setAttribute('class', 'outerItemBtn');
-
-    const innerListContainer = document.createElement('div');
-    innerListContainer.setAttribute('id', 'innerListContainer');
-    innerListContainer.setAttribute('class', 'innerListContainer');
-
-    const innerList = document.createElement('ul');
-    innerList.setAttribute('id', 'innerList');
-    innerList.setAttribute('class', 'innerList');
-
+    itemOuterList.append(itemOuterListItem);
     itemOuterListItem.append(outerItemSection, outerItemBtn);
     outerItemSection.append(innerListContainer);
     innerListContainer.append(innerList);
 
-    return itemOuterListItem;
+    document.querySelector('.mainContent').appendChild(projectWrapper);
 
-}
+    return addTaskIcon;
+});
 
-function innerListItem(itemName, itemDesc){
+addBtn1.addEventListener('click', function(){
 
     const innerListItem = document.createElement('li');
     innerListItem.setAttribute('id', 'innerListItem');
@@ -103,12 +112,12 @@ function innerListItem(itemName, itemDesc){
     const listItemText = document.createElement('p');
     listItemText.setAttribute('id', 'listItemText');
     listItemText.setAttribute('class', 'listItemText');
-    listItemText.textContent = itemName
+    listItemText.textContent = taskFormInput1.value;
 
     const listItemDesc = document.createElement('p');
     listItemDesc.setAttribute('id', 'listItemDesc');
     listItemDesc.setAttribute('class', 'listItemDesc');
-    listItemDesc.textContent = itemDesc
+    listItemDesc.textContent = taskFormInput2.value;
 
     const itemActionsContainer = document.createElement('div');
     itemActionsContainer.setAttribute('id', 'itemActionsContainer');
@@ -124,9 +133,11 @@ function innerListItem(itemName, itemDesc){
     listItemContent.append(listItemText, listItemDesc);
     itemActionsContainer.append(listItemEditBtn);
 
+    document.querySelector('.innerList.activeProject').appendChild(innerListItem);
+
     return innerListItem;
 
-}
+});
 
 function HTMLcreator(name, type, ...class1) {
     const HTMLname = document.createElement(type);

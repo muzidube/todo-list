@@ -73,15 +73,32 @@ const projectCategory = HTMLcreator('projectCategory', 'div');
 const projectMain = HTMLcreator('projectMain', 'div');
 const projectHeader = HTMLcreator('projectHeader', 'div', 'categoryDiv');
 const projectInnerDiv = HTMLcreator('projectInnerDiv', 'div', 'categoryInnerDiv');
-const projectIcon = HTMLcreator('projectIcon', 'img', 'categoryIcon');
+
+projectInnerDiv.addEventListener('click', function() {
+    if (projectItems.style.display === "block") {
+        projectItems.style.display = "none";
+      } else {
+        projectItems.style.display = "block";
+      }
+      if (projectIcon.classList.contains("arrowDown")) {
+        projectIcon.classList.remove("arrowDown");
+        projectIcon.classList.add("arrowRight");
+      } else {
+        projectIcon.classList.add("arrowDown");
+        projectIcon.classList.remove("arrowRight");
+      }
+
+});
+
+const projectIcon = HTMLcreator('projectIcon', 'img', 'categoryIcon', 'projectArrow', 'arrowDown');
 projectIcon.setAttribute('src', rightArrow);
 const projectText = HTMLcreator('todayText', 'p', 'categoryText', 'projectText');
-projectText.textContent = 'Project';
+projectText.textContent = 'Projects';
 const addProjectIcon = HTMLcreator('addProjectIcon', 'img', 'categoryIcon', 'projectIcon');
 addProjectIcon.setAttribute('src', plus );
-const projectItem = HTMLcreator('projectItem', 'div');
+const projectItems = HTMLcreator('projectItems', 'div', 'projectItems--animated', 'projectItems-6');
+projectItems.setAttribute('style', 'display: block');
 const mainSection = HTMLcreator('mainSection', 'div');
-mainSection.textContent = 'test';
 const mainContent = HTMLcreator('mainContent', 'div');
 const mainInbox = HTMLcreator('mainInbox', 'div');
 const mainToday = HTMLcreator('mainToday', 'div');
@@ -104,6 +121,26 @@ closeBtn.setAttribute('type', 'button');
 const addBtn = HTMLcreator('addBtn', 'button', 'projectFormBtns');
 addBtn.textContent = 'Add';
 addBtn.setAttribute('type', 'button');
+const closeBtn1 = HTMLcreator('closeBtn', 'button', 'projectFormBtns');
+closeBtn1.textContent = 'Close';
+closeBtn1.setAttribute('type', 'button');
+const addBtn1 = HTMLcreator('addBtn', 'button', 'projectFormBtns');
+addBtn1.textContent = 'Add';
+addBtn1.setAttribute('type', 'button');
+
+const taskFormDiv = HTMLcreator('taskFormDiv', 'div', 'projectFormDiv');
+const taskForm = HTMLcreator('taskForm', 'form', 'formContainer', 'projectForm');
+const taskFormHeader = HTMLcreator('taskFormHeader', 'p', 'formHeader');
+taskFormHeader.textContent = 'New Task'
+const taskFormInput1 = HTMLcreator('taskFormInput', 'input','formInput', 'taskFormInput1');
+taskFormInput1.setAttribute('type', 'name');
+taskFormInput1.setAttribute('name', 'name');
+taskFormInput1.setAttribute('placeholder', 'e.g., Lunch at 1pm');
+const taskFormInput2 = HTMLcreator('taskFormInput', 'input','formInput', 'taskFormInput2');
+taskFormInput2.setAttribute('type', 'description');
+taskFormInput2.setAttribute('name', 'description');
+taskFormInput2.setAttribute('placeholder', 'Description');
+const taskFormBtnsDiv = HTMLcreator('taskFormBtnsDiv', 'div', 'formBtnsDiv');
 
 
 
@@ -120,7 +157,7 @@ todayInnerDiv.append(todayIcon, todayText);
 leftUpcoming.append(upcomingInnerDiv, upcomingNum);
 upcomingInnerDiv.append(upcomingIcon, upcomingText);
 projectCategory.append(projectMain);
-projectMain.append(projectHeader);
+projectMain.append(projectHeader, projectItems);
 projectHeader.append(projectInnerDiv, addProjectIcon)
 projectInnerDiv.append(projectIcon, projectText);
 mainSection.append(mainContent);
@@ -130,10 +167,14 @@ projectFormDiv.append(projectForm);
 projectForm.append(formHeader, formLabel, formInput, formBtnsDiv);
 formBtnsDiv.append(closeBtn, addBtn);
 
+taskFormDiv.append(taskForm);
+taskForm.append(taskFormHeader, taskFormInput1, taskFormInput2, taskFormBtnsDiv);
+taskFormBtnsDiv.append(closeBtn1, addBtn1)
+
 
 const pageWrap = HTMLcreator('pageWrap', 'div');
 
-pageWrap.append(header, appContainer, projectFormDiv);
+pageWrap.append(header, appContainer, projectFormDiv, taskFormDiv);
 
 export {
     pageWrap,
@@ -145,10 +186,18 @@ export {
     mainToday,
     mainUpcoming,
     projectMain,
-    projectItem,
+    projectItems,
     addProjectIcon,
     projectFormDiv,
     closeBtn,
     addBtn,
+    addBtn1,
+    closeBtn1,
+    formInput,
+    taskFormDiv,
+    taskFormInput1,
+    taskFormInput2,
 
 }
+
+export {HTMLcreator}
