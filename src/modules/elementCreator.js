@@ -48,21 +48,57 @@ const leftMenu = HTMLcreator('leftMenu', 'div', 'active');
 const leftContent = HTMLcreator('leftContent', 'div');
 const leftModules = HTMLcreator('leftModules', 'div');
 const leftCategories = HTMLcreator('leftCategories', 'div');
-const leftInbox = HTMLcreator('leftInbox', 'div', 'categoryDiv');
+const leftInbox = HTMLcreator('leftInbox', 'div', 'categoryDiv', 'mainProject', 'Inbox');
+
+leftInbox.addEventListener('click', function() {
+    console.log('hello2');
+    let activeProjects = document.getElementsByClassName("activeProject");
+    while (activeProjects.length)
+    activeProjects[0].classList.remove("activeProject");
+
+    document.querySelector('.projectWrapper.Inbox').classList.add('activeProject');
+    document.querySelector('.innerList.Inbox').classList.add('activeProject');
+
+})
+
 const inboxInnerDiv = HTMLcreator('inboxInnerDiv', 'div', 'categoryInnerDiv')
 const inboxIcon = HTMLcreator('inboxIcon', 'img', 'categoryIcon');
 inboxIcon.setAttribute('src', inbox);
 const inboxText = HTMLcreator('inboxText', 'p', 'categoryText');
 inboxText.textContent = 'Inbox';
 const inboxNum = HTMLcreator('inboxNum', 'p', 'categoryNum');
-const leftToday = HTMLcreator('leftToday', 'div', 'categoryDiv');
+const leftToday = HTMLcreator('leftToday', 'div', 'categoryDiv', 'mainProject', 'Today');
+
+leftToday.addEventListener('click', function() {
+    console.log('hello2');
+    let activeProjects = document.getElementsByClassName("activeProject");
+    while (activeProjects.length)
+    activeProjects[0].classList.remove("activeProject");
+
+    document.querySelector('.projectWrapper.Today').classList.add('activeProject');
+    document.querySelector('.innerList.Today').classList.add('activeProject');
+
+})
+
 const todayInnerDiv = HTMLcreator('todayInnerDiv', 'div', 'categoryInnerDiv')
 const todayIcon = HTMLcreator('todayIcon', 'img', 'categoryIcon');
 todayIcon.setAttribute('src', today);
 const todayText = HTMLcreator('todayText', 'p', 'categoryText');
 todayText.textContent = 'Today';
 const todayNum = HTMLcreator('todayNum', 'p', 'categoryNum');
-const leftUpcoming = HTMLcreator('leftUpcoming', 'div', 'categoryDiv');
+const leftUpcoming = HTMLcreator('leftUpcoming', 'div', 'categoryDiv', 'mainProject', 'Upcoming');
+
+leftUpcoming.addEventListener('click', function() {
+    console.log('hello2');
+    let activeProjects = document.getElementsByClassName("activeProject");
+    while (activeProjects.length)
+    activeProjects[0].classList.remove("activeProject");
+
+    document.querySelector('.projectWrapper.Upcoming').classList.add('activeProject');
+    document.querySelector('.innerList.Upcoming').classList.add('activeProject');
+
+})
+
 const upcomingInnerDiv = HTMLcreator('upcomingInnerDiv', 'div', 'categoryInnerDiv')
 const upcomingIcon = HTMLcreator('upcomingIcon', 'img', 'categoryIcon');
 upcomingIcon.setAttribute('src', upcoming);
@@ -182,12 +218,15 @@ export {
     menuBtn,
     appContent,
     leftMenu,
+    leftInbox,
+    leftToday,
     mainInbox,
     mainToday,
     mainUpcoming,
     projectMain,
     projectItems,
     addProjectIcon,
+    mainContent,
     projectFormDiv,
     closeBtn,
     addBtn,

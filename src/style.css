@@ -315,6 +315,14 @@ body {
     display: block;
 }
 
+ul {
+    list-style-type: none;
+}
+
+.innerListItemBody {
+    display: flex;
+}
+
 .slide-in {
     animation: slide-in 0.3s forwards;
     -webkit-animation: slide-in 0.3s forwards;
