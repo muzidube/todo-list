@@ -11,41 +11,13 @@ import {taskItemPopup} from './uiController';
 function projectCreation() {
     projectList.forEach(function(project) {
         document.querySelector('.projectItems').innerHTML = '';    
-        document.querySelector('.mainContent').innerHTML = '';
+        document.querySelector('.mainProjects').innerHTML = '';
     })
 
     projectList.forEach(function(project) {
         let activeProjects = document.getElementsByClassName("activeProject");
         while (activeProjects.length)
         activeProjects[0].classList.remove("activeProject");
-
-        const leftProject = HTMLcreator2('leftProject', 'div', 'leftProjectDiv', 'categoryDiv', project._name);
-        leftProject.setAttribute('id', 'project' + project._id)
-        leftProject.setAttribute('id', 'project' + project._id)
-        leftProject.addEventListener('click', function () {
-            let activeProjects = document.getElementsByClassName("activeProject");
-            let activeList = document.getElementsByClassName("activeProject");
-
-            while (activeProjects.length)
-            activeProjects[0].classList.remove("activeProject");
-            while (activeList.length)
-            activeList[0].classList.remove("activeList");
-
-            if (projectWrapper.classList.contains(leftProject.textContent)) {
-                projectWrapper.classList.add('activeProject');
-                innerList.classList.add('activeList');
-            }
-        })
-        const leftProjectInner = HTMLcreator2('leftProjectInner', 'div', 'leftProjectInner', 'categoryInnerDiv')
-        const leftProjectIcon = HTMLcreator2('leftProjectIcon', 'img', 'leftProjectIcon');
-        leftProjectIcon.setAttribute('src', circle);
-        const leftProjectText = HTMLcreator2('leftProjectText', 'p', 'leftProjectText');
-        leftProjectText.textContent = project._name;
-        const leftProjectNum = HTMLcreator2('leftProjectNum', 'p', 'leftProjectNum');
-
-        leftProject.append(leftProjectInner, leftProjectNum);
-        leftProjectInner.append(leftProjectIcon, leftProjectText);
-        document.querySelector('.projectItems').appendChild(leftProject);
 
         const projectWrapper = HTMLcreator2('projectWrapper', 'div', 'activeProject', project._name);
         projectWrapper.setAttribute('id', 'project' + project._id)
@@ -90,10 +62,42 @@ function projectCreation() {
         outerItemSection.append(innerListContainer);
         innerListContainer.append(innerListToDo, innerListCompleted);
 
-        document.querySelector('.mainContent').appendChild(projectWrapper);
+        if (project._name === 'Inbox') {
+            document.querySelector('.mainInbox').appendChild(projectWrapper);
+        } else {
+
+        const leftProject = HTMLcreator2('leftProject', 'div', 'leftProjectDiv', 'categoryDiv', project._name);
+        leftProject.setAttribute('id', 'project' + project._id)
+        leftProject.setAttribute('id', 'project' + project._id)
+        leftProject.addEventListener('click', function () {
+            let activeProjects = document.getElementsByClassName("activeProject");
+            let activeList = document.getElementsByClassName("activeProject");
+
+            while (activeProjects.length)
+            activeProjects[0].classList.remove("activeProject");
+            while (activeList.length)
+            activeList[0].classList.remove("activeList");
+
+            if (projectWrapper.classList.contains(leftProject.textContent)) {
+                projectWrapper.classList.add('activeProject');
+                innerList.classList.add('activeList');
+            }
+        })
+        const leftProjectInner = HTMLcreator2('leftProjectInner', 'div', 'leftProjectInner', 'categoryInnerDiv')
+        const leftProjectIcon = HTMLcreator2('leftProjectIcon', 'img', 'leftProjectIcon');
+        leftProjectIcon.setAttribute('src', circle);
+        const leftProjectText = HTMLcreator2('leftProjectText', 'p', 'leftProjectText');
+        leftProjectText.textContent = project._name;
+        const leftProjectNum = HTMLcreator2('leftProjectNum', 'p', 'leftProjectNum');
+
+        leftProject.append(leftProjectInner, leftProjectNum);
+        leftProjectInner.append(leftProjectIcon, leftProjectText);
+        document.querySelector('.projectItems').appendChild(leftProject);
+
+        document.querySelector('.mainProjects').appendChild(projectWrapper);
 
         return addTaskIcon;
-    })
+    }})
 }
 
 function taskCreation2() {

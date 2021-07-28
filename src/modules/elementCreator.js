@@ -54,7 +54,7 @@ leftInbox.addEventListener('click', function() {
     activeProjects[0].classList.remove("activeProject");
 
     document.querySelector('.projectWrapper.Inbox').classList.add('activeProject');
-    document.querySelector('.innerList.Inbox').classList.add('activeProject');
+    document.querySelector('.innerList.Inbox').classList.add('activeList');
 
 })
 
@@ -134,6 +134,7 @@ const mainContent = HTMLcreator('mainContent', 'div');
 const mainInbox = HTMLcreator('mainInbox', 'div');
 const mainToday = HTMLcreator('mainToday', 'div');
 const mainUpcoming = HTMLcreator('mainUpcoming', 'div');
+const mainProjects = HTMLcreator('mainProjects', 'div');
 
 const projectFormDiv = HTMLcreator('projectFormDiv', 'div');
 const projectForm = HTMLcreator('projectForm', 'form', 'formContainer');
@@ -192,7 +193,7 @@ projectMain.append(projectHeader, projectItems);
 projectHeader.append(projectInnerDiv, addProjectIcon)
 projectInnerDiv.append(projectIcon, projectText);
 mainSection.append(mainContent);
-mainContent.append(mainInbox, mainToday, mainUpcoming);
+mainContent.append(mainInbox, mainToday, mainUpcoming, mainProjects);
 
 projectFormDiv.append(projectForm);
 projectForm.append(formHeader, formLabel, formInput, formBtnsDiv);

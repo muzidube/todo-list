@@ -5,8 +5,11 @@ import './modules/creatorTest';
 import './modules/mainProjects';
 import './modules/tasks';
 import './modules/projects';
+import {projectCreation} from './modules/creatorTest'
+
 
 document.querySelector('body').appendChild(pageWrap);
 
-document.querySelector('.projectWrapper.Inbox').classList.add('activeProject');
-document.querySelector('.innerList.Inbox').classList.add('activeProject');
+//mainProjectCreator();
+
+projectCreation();
