@@ -51,6 +51,8 @@ function leftMenuActive() {
 function projectItemPopup() {
     let isOpen = projectFormDiv.style.display = "block";
     formInput.value = '';
+    taskFormInput1.value = '';
+    taskFormInput2.value = '';
 
     if (isOpen == true) {
         projectFormDiv.style.display = "none";
@@ -66,7 +68,6 @@ function projectItemPopupHide() {
 
 function addProjectItemPopupHide() {
     projectFormDiv.style.display = 'none';
-    hideOtherProjects()
 }
 
 function taskItemPopup() {
@@ -95,10 +96,21 @@ function addProjectItem() {
 
 }
 
-function hideOtherProjects() {
+/*function hideOtherProjects() {
     document.querySelectorAll('.projectWrapper').classList.remove('active');
     document.querySelector(formInput.value).classList.add('active');
-}
+}*/
+
+function array_move(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    return arr; // for testing
+};
 
 export {
     taskItemPopup

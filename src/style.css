@@ -44,7 +44,7 @@ body {
     margin: 0;
     padding: 0;
     border: 0;
-    font-family: 'Dosis-Light';
+    font-family: 'Dosis-Regular';
 
 }
 
@@ -143,6 +143,12 @@ body {
 .projectIcon {
     height: 15px;
     width: 15px;
+}
+
+.completedTaskIcon {
+    height: 17px;
+    width: 17px;
+    margin-left: 5px;
 }
 
 .projectArrow.arrowDown {
@@ -307,11 +313,65 @@ body {
     display: block;
 }
 
-.innerList {
-    display: none
+.itemOuterList {
+    padding: 0;
+    margin: 0;
 }
 
-.innerList.activeProject {
+.outerItemBtn {
+    width: 100%;
+    height: 20px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 700;
+    color: #dd4b39;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    cursor:pointer;
+    opacity: 0;
+    transition: opacity .2s cubic-bezier(.4,0,.2,1);
+}
+
+.outerItemBtn::before {
+    margin-right: 10px;
+    content: '';
+    display: block;
+    height: 1px;
+    flex: 1 1 auto;
+    opacity: .5;
+    background-color: #dd4b39;
+
+}
+
+.outerItemBtn::after {
+    margin-left: 10px;
+    content: '';
+    display: block;
+    height: 1px;
+    flex: 1 1 auto;
+    opacity: .5;
+    background-color: #dd4b39;
+
+}
+
+.outerItemBtn:hover {
+    opacity: 1;
+}
+
+.innerList {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+.innerList.activeList {
     display: block;
 }
 
@@ -320,7 +380,82 @@ ul {
 }
 
 .innerListItemBody {
-    display: flex;
+    display: grid;
+    grid-template-columns: 20px 20px 1fr;
+    align-items: center;
+}
+
+.listItemMoveDiv {
+    margin-right: 6px;
+    display: grid;
+    opacity: 0;
+    transition: opacity .2s cubic-bezier(.4,0,.2,1);
+}
+
+.listItemMoveDiv:hover {
+    opacity: 1;
+}
+
+.listItemMoveBtns {
+    height: 12px;
+    width: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.listItemUpBtn {
+    background: url(./components/images/up-arrow.svg)
+}
+
+.listItemDownBtn {
+    background: url(./components/images/down-arrow.svg)
+}
+
+.listItemCheckBtn {
+    height: 12px;
+    width: 12px;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.listItemCheckBtnToDo {
+    background: url(./components/images/list-circle.svg);
+}
+
+.listItemCheckBtnToDo:hover {
+    background: url(./components/images/ticked.svg);
+}
+
+.listItemCheckBtnCompleted {
+    background: url(./components/images/ticked.svg);
+}
+
+.listItemCheckBtnCompleted:hover {
+    background: url(./components/images/list-circle.svg);
+}
+
+.listItemContainer {
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.listItemEditBtn {
+    height: 12px;
+    width: 12px;
+    background: url(./components/images/pencil.svg);
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.listItemDesc {
+    font-family: 'Dosis-ExtraLight';
+}
+
+.innerListCompleted {
+    display: none;
+    text-decoration: line-through;
 }
 
 .slide-in {
@@ -392,5 +527,11 @@ inbox <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freep
 upcoming <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 today <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 right arrow <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-dot <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
+dot <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+circle <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+tick circle <div>Icons made by <a href="https://www.flaticon.com/authors/becris" title="Becris">Becris</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+arrow-up <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+arrow-down <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+pencil <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+completed <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>*/
 

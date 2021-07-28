@@ -14,8 +14,6 @@ import upcoming from '../components/images/calendar.svg';
 import rightArrow from '../components/images/right-arrow.svg';
 import plus from '../components/images/plus.svg';
 
-// HTMLcreator();
-
 const header = HTMLcreator('header', 'header');
 const headerContent = HTMLcreator('headerContent', 'div');
 const headerInner = HTMLcreator('headerInner', 'div');
@@ -51,7 +49,6 @@ const leftCategories = HTMLcreator('leftCategories', 'div');
 const leftInbox = HTMLcreator('leftInbox', 'div', 'categoryDiv', 'mainProject', 'Inbox');
 
 leftInbox.addEventListener('click', function() {
-    console.log('hello2');
     let activeProjects = document.getElementsByClassName("activeProject");
     while (activeProjects.length)
     activeProjects[0].classList.remove("activeProject");
@@ -70,7 +67,6 @@ const inboxNum = HTMLcreator('inboxNum', 'p', 'categoryNum');
 const leftToday = HTMLcreator('leftToday', 'div', 'categoryDiv', 'mainProject', 'Today');
 
 leftToday.addEventListener('click', function() {
-    console.log('hello2');
     let activeProjects = document.getElementsByClassName("activeProject");
     while (activeProjects.length)
     activeProjects[0].classList.remove("activeProject");
@@ -89,7 +85,6 @@ const todayNum = HTMLcreator('todayNum', 'p', 'categoryNum');
 const leftUpcoming = HTMLcreator('leftUpcoming', 'div', 'categoryDiv', 'mainProject', 'Upcoming');
 
 leftUpcoming.addEventListener('click', function() {
-    console.log('hello2');
     let activeProjects = document.getElementsByClassName("activeProject");
     while (activeProjects.length)
     activeProjects[0].classList.remove("activeProject");

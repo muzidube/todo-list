@@ -14,6 +14,7 @@ export class Project {
       this._id = _getID();
       this._name = name;
       this._projectTasks = [];
+      this._completedProjectTasks = [];
     }
   
     get id() {
@@ -55,14 +56,12 @@ let projectList = [];
 
 addBtn.addEventListener('click', function(e) {
       addProject(formInput.value);
-      console.log(formInput.value);
   })
 
 function addProject(name) {
       if (!name == '') {
           const newProject = new Project(name)
           projectList.push(newProject);
-          console.log(projectList);
           addToLocalStorage1(projectList);
       };
 };
@@ -80,7 +79,3 @@ function getFromLocalStorage() {
   export {
       projectList,
   }
-
-
-  //LOOK AT TASK CREATOR, IT IS USING TASKLIST AS ITS BASE BUT WE DONT
-  //USE TASKLIST ANYMORE, WILL HAVE TO USE SOMETHING ELSE.

@@ -1,8 +1,8 @@
-import { projectCreation, taskCreation } from "./creatorTest";
+import { projectCreation, taskCreation, taskCreation2 } from "./creatorTest";
 
 function addToLocalStorage(taskList) {
     localStorage.setItem('taskList', JSON.stringify(taskList));
-    taskCreation(taskList);
+    taskCreation2(taskList);
 }
 
 function addToLocalStorage1(projectList) {
