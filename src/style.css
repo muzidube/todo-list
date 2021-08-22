@@ -48,6 +48,11 @@ body {
 
 }
 
+header {
+    background: #0e1e25;
+    color: white;
+}
+
 .headerInner {
     display: flex;
     justify-content: space-between;
@@ -58,7 +63,6 @@ body {
     align-items: center;
     grid-template-columns: 40px 40px 1fr;
     width: 350px;
-    background: blue;
 }
 
 .rightNavContainer {
@@ -115,7 +119,7 @@ body {
 
 .leftMenu {
     display: grid;
-    background: red;
+    background: #fafafa;
     width: 350px;
     transform: translateX(-100%);
     -webkit-transform: translateX(-100%);
@@ -123,7 +127,6 @@ body {
 
 .leftMenu.active {
     display: grid;
-    background: red;
     width: 350px;
     transform: translateX(0%);
     -webkit-transform: translateX(0%);
@@ -226,7 +229,7 @@ body {
     display: none;
     position: fixed;
     width: 300px;
-    top: 50%;
+    bottom: 20%;
     left: 50%;
     border: 1px solid #7474749a;
     background-color: #ffffff;
@@ -296,6 +299,18 @@ body {
 }
 
 .taskFormInput2 {
+    height: 60px;
+}
+
+.editTaskHeader {
+    padding-bottom: 10px;
+}
+
+.editTaskDiv {
+    display: none;
+}
+
+.editTaskInput2 {
     height: 60px;
 }
 
@@ -488,7 +503,6 @@ ul {
 
 .mainSection {
     display: grid;
-    background: green;
     height: 100%;
     width: 100%;
 }

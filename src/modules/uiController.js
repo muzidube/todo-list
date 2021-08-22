@@ -10,15 +10,19 @@ import {
     addProjectIcon,
     projectFormDiv,
     taskFormDiv,
+    editTaskDiv,
     closeBtn,
     addBtn,
     closeBtn1,
     addBtn1,
+    closeBtn2,
+    addBtn2,
     leftMenu,
     formInput,
     taskFormInput1,
     taskFormInput2,
 } from './elementCreator';
+import { editTaskFormValues } from './tasks';
 
 
 menuBtn.addEventListener('click', leftMenuActive);
@@ -27,6 +31,8 @@ closeBtn.addEventListener('click', projectItemPopupHide);
 addBtn.addEventListener('click', addProjectItemPopupHide);
 closeBtn1.addEventListener('click', taskItemPopupHide);
 addBtn1.addEventListener('click', taskItemPopupHide);
+closeBtn2.addEventListener('click', editTaskPopupHide);
+addBtn2.addEventListener('click', editTaskPopupHide);
 
 
 function leftMenuActive() {
@@ -86,6 +92,21 @@ function taskItemPopupHide() {
     taskFormDiv.style.display = 'none';
 }
 
+function editTaskPopup() {
+    let isOpen = editTaskDiv.style.display = "block";
+    editTaskFormValues();
+
+    if (isOpen == true) {
+        editTaskDiv.style.display = "none";
+    } else {
+        editTaskDiv.style.display = "block";
+    }
+}
+
+function editTaskPopupHide() {
+    editTaskDiv.style.display = 'none';
+}
+
 
 
 function createProjectItem() {
@@ -113,5 +134,6 @@ function array_move(arr, old_index, new_index) {
 };
 
 export {
-    taskItemPopup
+    taskItemPopup,
+    editTaskPopup
 }

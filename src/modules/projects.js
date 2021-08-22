@@ -58,9 +58,13 @@ addBtn.addEventListener('click', function(e) {
       addProject(formInput.value);
   })
 
-const Inbox = new Project ('Inbox');
+const inbox = new Project ('Inbox');
+const today = new Project ('Today');
+const upcoming = new Project ('Upcoming');
 
-projectList.push(Inbox);
+projectList.push(upcoming);
+projectList.push(today);
+projectList.push(inbox);
 
 function addProject(name) {
       if (!name == '') {

@@ -4,12 +4,20 @@ import {
 
 import {
     addBtn,
-    addBtn1
+    addBtn1,
+    addBtn2,
+    editTaskInput1,
+    editTaskInput2,
+    editTaskInput3,
+    editTaskInput4,
+    formInput,
 } from './elementCreator'
 
 import {
     taskFormInput1,
     taskFormInput2,
+    taskFormInput3,
+    taskFormInput4,
 } from './elementCreator';
 
 import {
@@ -19,11 +27,13 @@ import {
 import { addToLocalStorage} from './localStorage';
 
 export class Task {
-    constructor(title, description) {
+    constructor(title, description, dueDate, priority) {
       this._projectID = getProjectID();
       this._taskID = _getID(); 
       this._title = title;
       this._description = description;
+      this._dueDate = dueDate;
+      this._priority = priority;
       this._completed = false;
     }
   
@@ -50,6 +60,26 @@ export class Task {
         this._description = value;
       }
     }
+
+    get dueDate() {
+      return this._dueDate;
+    }
+  
+    set dueDate(value) {
+      if (value) {
+        this._dueDate = value;
+      }
+    }
+  
+    get priority() {
+      return this._priority;
+    }
+  
+    set priority(value) {
+      if (value) {
+        this._priority = value;
+      }
+    }
   }
 
 function _getID() {
@@ -59,12 +89,17 @@ function _getID() {
 
 let taskList = [];
 
+addBtn2.addEventListener('click', function() {
+  editTaskValues();
+})
+
+
 addBtn1.addEventListener('click', function() {
-      addTask(taskFormInput1.value, taskFormInput2.value);
+      addTask(taskFormInput1.value, taskFormInput2.value, taskFormInput3.value, taskFormInput4.value);
 })
 
 addBtn.addEventListener('click', function() {
-    addTask(taskFormInput1.value, taskFormInput2.value);
+    addTask(taskFormInput1.value, taskFormInput2.value, taskFormInput3.value, taskFormInput4.value);
 })
 
 
@@ -73,6 +108,13 @@ function getProjectID() {
     return selectedProject
         ? selectedProject.id.substr(selectedProject.id.indexOf('_'))
         : null;
+}
+
+function getTaskID() {
+  const selectedTask = document.querySelector('.editingTask');
+  return selectedTask
+      ? selectedTask.id.substr(selectedTask.id.indexOf('_'))
+      : null;
 }
 
 function pushTask(arr, value, task) {
@@ -93,10 +135,10 @@ function getTaskList(arr, value) {
   }
 
 
-  function addTask(title, description) {
+  function addTask(title, description, dueDate, priority) {
     if (!title == '') {
         let tasks = getTaskList(projectList, getProjectID());
-        const newTask = new Task(title, description);
+        const newTask = new Task(title, description, dueDate, priority);
 
         if (tasks == '' || containsObject(taskFormInput1.value, getTaskList(projectList, getProjectID())) !== false) {
         pushTask(projectList, getProjectID(), newTask);
@@ -107,6 +149,25 @@ function getTaskList(arr, value) {
         }
       };
   };
+
+function editTaskValues() {
+  let tasks = getTaskList(projectList, getProjectID());
+
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i]._title === editTaskInput1.value) {
+      tasks[i]._title = editTaskInput1.value;
+      tasks[i]._description = editTaskInput2.value;
+      tasks[i]._dueDate = editTaskInput3.value;
+      tasks[i]._priority = editTaskInput4.value;
+      console.log('this my id?' + getTaskID());
+      console.log('this my index' + i)
+    }
+    console.table('editing' + tasks);
+    addToLocalStorage(tasks);
+  }
+}
+
+
 
 function getFromLocalStorage() {
     const reference = localStorage.getItem('taskList');
@@ -147,6 +208,27 @@ function changeTaskStatus(value) {
     }
 }
 
+function getTaskFormValues(id) {
+  let tasks = getTaskList(projectList, getProjectID());
+
+  for (let i=0, iLen=tasks.length; i<iLen; i++) {
+    if (tasks[i]._taskID == id) {
+      editTaskInput1.value = tasks[i]._title;
+      editTaskInput2.value = tasks[i]._description;
+      editTaskInput3.value = tasks[i]._dueDate;
+      editTaskInput4.value = tasks[i]._priority;
+
+      console.log(i);
+      console.log(tasks.length);
+
+      addBtn2.addEventListener('click', function() {
+        editTaskValues('editValues ' + id);
+      })
+    }
+    return
+  }
+}
+
 function array_move(arr, old_index, new_index) {
     if (new_index >= arr.length) {
         var k = new_index - arr.length + 1;
@@ -168,6 +250,8 @@ function array_move(arr, old_index, new_index) {
       getProjectID,
       addTask,
       changeTaskStatus,
+      getTaskFormValues,
+      editTaskValues,
   }
 
 

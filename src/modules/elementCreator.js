@@ -72,7 +72,7 @@ leftToday.addEventListener('click', function() {
     activeProjects[0].classList.remove("activeProject");
 
     document.querySelector('.projectWrapper.Today').classList.add('activeProject');
-    document.querySelector('.innerList.Today').classList.add('activeProject');
+    document.querySelector('.innerList.Today').classList.add('activeList');
 
 })
 
@@ -90,7 +90,7 @@ leftUpcoming.addEventListener('click', function() {
     activeProjects[0].classList.remove("activeProject");
 
     document.querySelector('.projectWrapper.Upcoming').classList.add('activeProject');
-    document.querySelector('.innerList.Upcoming').classList.add('activeProject');
+    document.querySelector('.innerList.Upcoming').classList.add('activeList');
 
 })
 
@@ -131,10 +131,10 @@ const projectItems = HTMLcreator('projectItems', 'div', 'projectItems--animated'
 projectItems.setAttribute('style', 'display: block');
 const mainSection = HTMLcreator('mainSection', 'div');
 const mainContent = HTMLcreator('mainContent', 'div');
-const mainInbox = HTMLcreator('mainInbox', 'div');
-const mainToday = HTMLcreator('mainToday', 'div');
-const mainUpcoming = HTMLcreator('mainUpcoming', 'div');
-const mainProjects = HTMLcreator('mainProjects', 'div');
+const mainInbox = HTMLcreator('mainInbox', 'div', 'projectContainers');
+const mainToday = HTMLcreator('mainToday', 'div', 'projectContainers');
+const mainUpcoming = HTMLcreator('mainUpcoming', 'div', 'projectContainers');
+const mainProjects = HTMLcreator('mainProjects', 'div', 'projectContainers');
 
 const projectFormDiv = HTMLcreator('projectFormDiv', 'div');
 const projectForm = HTMLcreator('projectForm', 'form', 'formContainer');
@@ -159,6 +159,12 @@ closeBtn1.setAttribute('type', 'button');
 const addBtn1 = HTMLcreator('addBtn', 'button', 'projectFormBtns');
 addBtn1.textContent = 'Add';
 addBtn1.setAttribute('type', 'button');
+const closeBtn2 = HTMLcreator('closeBtn', 'button', 'projectFormBtns');
+closeBtn2.textContent = 'Close';
+closeBtn2.setAttribute('type', 'button');
+const addBtn2 = HTMLcreator('addBtn', 'button', 'projectFormBtns');
+addBtn2.textContent = 'Edit';
+addBtn2.setAttribute('type', 'button');
 
 const taskFormDiv = HTMLcreator('taskFormDiv', 'div', 'projectFormDiv');
 const taskForm = HTMLcreator('taskForm', 'form', 'formContainer', 'projectForm');
@@ -172,7 +178,37 @@ const taskFormInput2 = HTMLcreator('taskFormInput', 'input','formInput', 'taskFo
 taskFormInput2.setAttribute('type', 'description');
 taskFormInput2.setAttribute('name', 'description');
 taskFormInput2.setAttribute('placeholder', 'Description');
+const taskFormInput3 = HTMLcreator('taskFormInput', 'input','formInput', 'taskFormInput3');
+taskFormInput3.setAttribute('type', 'date');
+taskFormInput3.setAttribute('name', 'dueDate');
+taskFormInput3.setAttribute('placeholder', 'Due Date');
+const taskFormInput4 = HTMLcreator('taskFormInput', 'input','formInput', 'taskFormInput4');
+taskFormInput4.setAttribute('type', 'priority');
+taskFormInput4.setAttribute('name', 'priority');
+taskFormInput4.setAttribute('placeholder', 'Priority');
 const taskFormBtnsDiv = HTMLcreator('taskFormBtnsDiv', 'div', 'formBtnsDiv');
+
+const editTaskDiv = HTMLcreator('editTaskDiv', 'div', 'projectFormDiv');
+const editTask = HTMLcreator('editTask', 'form', 'formContainer', 'projectForm');
+const editTaskHeader = HTMLcreator('editTaskHeader', 'p', 'formHeader');
+editTaskHeader.textContent = 'Edit Task'
+const editTaskInput1 = HTMLcreator('editTaskInput', 'input','formInput', 'editTaskInput1');
+editTaskInput1.setAttribute('type', 'name');
+editTaskInput1.setAttribute('name', 'name');
+editTaskInput1.setAttribute('placeholder', 'e.g., Lunch at 1pm');
+const editTaskInput2 = HTMLcreator('editTaskInput', 'input','formInput', 'editTaskInput2');
+editTaskInput2.setAttribute('type', 'description');
+editTaskInput2.setAttribute('name', 'description');
+editTaskInput2.setAttribute('placeholder', 'Description');
+const editTaskInput3 = HTMLcreator('editTaskInput', 'input','formInput', 'editTaskInput3');
+editTaskInput3.setAttribute('type', 'date');
+editTaskInput3.setAttribute('name', 'dueDate');
+editTaskInput3.setAttribute('placeholder', 'Due Date');
+const editTaskInput4 = HTMLcreator('editTaskInput', 'input','formInput', 'editTaskInput4');
+editTaskInput4.setAttribute('type', 'priority');
+editTaskInput4.setAttribute('name', 'priority');
+editTaskInput4.setAttribute('placeholder', 'Priority');
+const editTaskBtnsDiv = HTMLcreator('editTaskBtnsDiv', 'div', 'formBtnsDiv');
 
 
 
@@ -200,13 +236,17 @@ projectForm.append(formHeader, formLabel, formInput, formBtnsDiv);
 formBtnsDiv.append(closeBtn, addBtn);
 
 taskFormDiv.append(taskForm);
-taskForm.append(taskFormHeader, taskFormInput1, taskFormInput2, taskFormBtnsDiv);
+taskForm.append(taskFormHeader, taskFormInput1, taskFormInput2, taskFormInput3, taskFormInput4, taskFormBtnsDiv);
 taskFormBtnsDiv.append(closeBtn1, addBtn1)
+
+editTaskDiv.append(editTask);
+editTask.append(editTaskHeader, editTaskInput1, editTaskInput2, editTaskInput3, editTaskInput4, editTaskBtnsDiv);
+editTaskBtnsDiv.append(closeBtn2, addBtn2)
 
 
 const pageWrap = HTMLcreator('pageWrap', 'div');
 
-pageWrap.append(header, appContainer, projectFormDiv, taskFormDiv);
+pageWrap.append(header, appContainer, projectFormDiv, taskFormDiv, editTaskDiv);
 
 export {
     pageWrap,
@@ -232,6 +272,15 @@ export {
     taskFormDiv,
     taskFormInput1,
     taskFormInput2,
+    taskFormInput3,
+    taskFormInput4,
+    addBtn2,
+    closeBtn2,
+    editTaskDiv,
+    editTaskInput1,
+    editTaskInput2,
+    editTaskInput3,
+    editTaskInput4,
 
 }
 

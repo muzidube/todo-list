@@ -1,16 +1,24 @@
 import { projectList } from "./projects";
-import { changeTaskStatus} from "./tasks";
-import {HTMLcreator as HTMLcreator2} from './elementCreator';
+import { changeTaskStatus, getTaskFormValues, editTaskValues} from "./tasks";
+import {HTMLcreator as HTMLcreator2,
+    editTaskInput1,
+    editTaskInput2,
+    editTaskInput3,
+    editTaskInput4,
+    addBtn2,} from './elementCreator';
 import circle from '../components/images/circle.svg';
 import plus from '../components/images/plus.svg';
 import completed from '../components/images/completed.svg';
-import {taskItemPopup} from './uiController';
+import {taskItemPopup, editTaskPopup} from './uiController';
 
 
 
 function projectCreation() {
     projectList.forEach(function(project) {
         document.querySelector('.projectItems').innerHTML = '';    
+        document.querySelector('.mainInbox').innerHTML = '';
+        document.querySelector('.mainToday').innerHTML = '';
+        document.querySelector('.mainUpcoming').innerHTML = '';
         document.querySelector('.mainProjects').innerHTML = '';
     })
 
@@ -64,7 +72,19 @@ function projectCreation() {
 
         if (project._name === 'Inbox') {
             document.querySelector('.mainInbox').appendChild(projectWrapper);
-        } else {
+
+        } else if (project._name === 'Today') {
+            document.querySelector('.mainToday').appendChild(projectWrapper);
+            innerListToDo.setAttribute('id', 'projectInnerListToDoToday');
+            innerListCompleted.setAttribute('id', 'projectInnerListCompletedToday');  
+            
+        } else if (project._name === 'Upcoming') {
+            document.querySelector('.mainUpcoming').appendChild(projectWrapper);
+            innerListToDo.setAttribute('id', 'projectInnerListToDoUpcoming');
+            innerListCompleted.setAttribute('id', 'projectInnerListCompletedUpcoming');  
+        }
+        
+        else if (project._name !== 'Inbox' && project._name !== 'Today' && project._name !== 'Upcoming') {
 
         const leftProject = HTMLcreator2('leftProject', 'div', 'leftProjectDiv', 'categoryDiv', project._name);
         leftProject.setAttribute('id', 'project' + project._id)
@@ -80,7 +100,7 @@ function projectCreation() {
 
             if (projectWrapper.classList.contains(leftProject.textContent)) {
                 projectWrapper.classList.add('activeProject');
-                innerList.classList.add('activeList');
+                innerListToDo.classList.add('activeList');
             }
         })
         const leftProjectInner = HTMLcreator2('leftProjectInner', 'div', 'leftProjectInner', 'categoryInnerDiv')
@@ -105,6 +125,10 @@ function taskCreation2() {
     projectList.forEach(project => project._projectTasks.forEach(function(task) {
     document.querySelector('#projectInnerListToDo' + task._projectID).innerHTML = '';
     document.querySelector('#projectInnerListCompleted' + task._projectID).innerHTML = ''; 
+    document.querySelector('#projectInnerListToDoToday').innerHTML = '';
+    document.querySelector('#projectInnerListCompletedToday').innerHTML = ''; 
+    document.querySelector('#projectInnerListToDoUpcoming').innerHTML = '';
+    document.querySelector('#projectInnerListCompletedUpcoming').innerHTML = ''; 
     }));
 
     projectList.forEach(project => project._projectTasks.forEach(function(task, project) {
@@ -169,6 +193,30 @@ function taskCreation2() {
             const listItemEditBtn = document.createElement('button');
             listItemEditBtn.setAttribute('id', 'listItemEditBtn');
             listItemEditBtn.setAttribute('class', 'listItemEditBtn');
+            listItemEditBtn.addEventListener('click', function() {
+                let editingTask = document.getElementsByClassName("editingTask");
+                while (editingTask.length)
+                editingTask[0].classList.remove("editingTask");
+
+                if (innerListItem.classList.contains(task._taskID)) {
+                    innerListItem.classList.add('editingTask');
+                }
+
+                let isOpen = editTaskDiv.style.display = "block";
+                //getTaskFormValues(task._taskID);
+                console.log('formValues ' + task._taskID);
+
+                editTaskInput1.value = task._title;
+                editTaskInput2.value = task._description;
+                editTaskInput3.value = task._dueDate;
+                editTaskInput4.value = task._priority;
+            
+                if (isOpen == true) {
+                    editTaskDiv.style.display = "none";
+                } else {
+                    editTaskDiv.style.display = "block";
+                }
+            });
 
             innerListItem.append(innerListItemBody);
             innerListItemBody.append(listItemMoveDiv, listItemCheckBtn, listItemContainer);
@@ -177,7 +225,25 @@ function taskCreation2() {
             listItemContent.append(listItemText, listItemDesc);
             itemActionsContainer.append(listItemEditBtn);
 
-            document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+            let today = (new Date()).toISOString().split('T')[0];
+            let nextDay1 = new Date((new Date()).valueOf() + 1000*3600*24).toISOString().split('T')[0];
+            let nextDay2 = new Date((new Date()).valueOf() + ((1000*3600*24)*2)).toISOString().split('T')[0];
+            let nextDay3 = new Date((new Date()).valueOf() + ((1000*3600*24)*3)).toISOString().split('T')[0];
+            let nextDay4 = new Date((new Date()).valueOf() + ((1000*3600*24)*4)).toISOString().split('T')[0];
+            let nextDay5 = new Date((new Date()).valueOf() + ((1000*3600*24)*5)).toISOString().split('T')[0];
+            let nextDay6 = new Date((new Date()).valueOf() + ((1000*3600*24)*6)).toISOString().split('T')[0];
+
+            if (task._dueDate == today) {
+               let innerListItemToday = innerListItem.cloneNode(true);
+                document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                document.querySelector('#projectInnerListToDoToday').appendChild(innerListItemToday);
+            } else if (task._dueDate == nextDay1 || task._dueDate == nextDay2 || task._dueDate == nextDay3 || task._dueDate == nextDay4 || task._dueDate == nextDay5 || task._dueDate == nextDay6) {
+                let innerListItemUpcoming = innerListItem.cloneNode(true);
+                document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                document.querySelector('#projectInnerListToDoUpcoming').appendChild(innerListItemUpcoming);
+            } else {
+                document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+            }
 
         } else {
             const innerListItem = document.createElement('li');
@@ -248,7 +314,21 @@ function taskCreation2() {
             listItemContent.append(listItemText, listItemDesc);
             itemActionsContainer.append(listItemEditBtn);
         
-            document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);     
+            let today = (new Date()).toISOString().split('T')[0];
+            let nextDay1 = new Date((new Date()).valueOf() + 1000*3600*24).toISOString().split('T')[0];
+            let nextDay2 = new Date((new Date()).valueOf() + ((1000*3600*24)*2)).toISOString().split('T')[0];
+            let nextDay3 = new Date((new Date()).valueOf() + ((1000*3600*24)*3)).toISOString().split('T')[0];
+            let nextDay4 = new Date((new Date()).valueOf() + ((1000*3600*24)*4)).toISOString().split('T')[0];
+            let nextDay5 = new Date((new Date()).valueOf() + ((1000*3600*24)*5)).toISOString().split('T')[0];
+            let nextDay6 = new Date((new Date()).valueOf() + ((1000*3600*24)*6)).toISOString().split('T')[0];
+
+            if (task._dueDate == today) {
+               let innerListItemToday = innerListItem.cloneNode(true);
+                document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);
+                document.querySelector('#projectInnerListCompletedToday').appendChild(innerListItemToday);
+            } else {
+                document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);
+            }    
         }
     }))
     
