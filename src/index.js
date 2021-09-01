@@ -5,11 +5,16 @@ import './modules/creatorTest';
 import './modules/mainProjects';
 import './modules/tasks';
 import './modules/projects';
-import {projectCreation} from './modules/creatorTest'
+import {projectCreation, taskCreation2} from './modules/creatorTest'
+import { getFromLocalStorage } from './modules/projects';
+import { getFromLocalStorage2 } from './modules/tasks';
 
 
 document.querySelector('body').appendChild(pageWrap);
 
 //mainProjectCreator();
 
+getFromLocalStorage();
 projectCreation();
+getFromLocalStorage2();
+taskCreation2();

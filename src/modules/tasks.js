@@ -24,7 +24,7 @@ import {
     projectList
 } from './projects'
 
-import { addToLocalStorage} from './localStorage';
+import { addToLocalStorage, addToLocalStorage1, addToLocalStorage2} from './localStorage';
 
 export class Task {
     constructor(title, description, dueDate, priority) {
@@ -99,7 +99,7 @@ addBtn1.addEventListener('click', function() {
 })
 
 addBtn.addEventListener('click', function() {
-    addTask(taskFormInput1.value, taskFormInput2.value, taskFormInput3.value, taskFormInput4.value);
+  addToLocalStorage(taskList);
 })
 
 
@@ -143,6 +143,7 @@ function getTaskList(arr, value) {
         if (tasks == '' || containsObject(taskFormInput1.value, getTaskList(projectList, getProjectID())) !== false) {
         pushTask(projectList, getProjectID(), newTask);
         console.table(tasks)
+        addToLocalStorage2(projectList);
         addToLocalStorage(tasks);
         } else {
             alert('Task name taken.')
@@ -169,7 +170,7 @@ function editTaskValues() {
 
 
 
-function getFromLocalStorage() {
+function getFromLocalStorage2() {
     const reference = localStorage.getItem('taskList');
     if (reference) {
       taskList = JSON.parse(reference);
@@ -204,6 +205,7 @@ function changeTaskStatus(value) {
         if (tasks[i]._taskID == value) {
             tasks[i]._completed = !tasks[i]._completed;
             console.table(tasks);
+            addToLocalStorage(tasks);
         }
     }
 }
@@ -252,6 +254,7 @@ function array_move(arr, old_index, new_index) {
       changeTaskStatus,
       getTaskFormValues,
       editTaskValues,
+      getFromLocalStorage2,
   }
 
 

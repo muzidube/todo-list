@@ -16,7 +16,7 @@ import {taskItemPopup, editTaskPopup} from './uiController';
 function projectCreation() {
     projectList.forEach(function(project) {
         document.querySelector('.projectItems').innerHTML = '';    
-        document.querySelector('.mainInbox').innerHTML = '';
+        document.querySelector('.mainAgenda').innerHTML = '';
         document.querySelector('.mainToday').innerHTML = '';
         document.querySelector('.mainUpcoming').innerHTML = '';
         document.querySelector('.mainProjects').innerHTML = '';
@@ -31,8 +31,10 @@ function projectCreation() {
         projectWrapper.setAttribute('id', 'project' + project._id)
         const projectHeader = HTMLcreator2('projectHeader', 'div');
         const projectHeaderContent = HTMLcreator2('projectHeaderContent', 'div', 'categoryDiv');
-        const projectHeaderTitle = HTMLcreator2('projectHeaderTitle', 'h1');
+        const projectHeaderTitle = HTMLcreator2('projectHeaderTitle', 'h1', 'activeTitle');
         projectHeaderTitle.textContent = project._name;
+        const projectHeaderTitleCompleted = HTMLcreator2('projectHeaderTitle', 'h1', 'projectHeaderTitleCompleted');
+        projectHeaderTitleCompleted.textContent = project._name + ' - Completed';
         const projectHeaderActions = HTMLcreator2('projectHeaderActions', 'div');
         const addTaskIcon = HTMLcreator2('addTaskIcon', 'img', 'categoryIcon', 'projectIcon');
         const completedTaskIcon = HTMLcreator2('completedTaskIcon', 'img', 'categoryIcon', 'projectIcon');
@@ -41,6 +43,8 @@ function projectCreation() {
         completedTaskIcon.addEventListener('click', function() {
             innerListToDo.classList.toggle('activeList')
             innerListCompleted.classList.toggle('activeList')
+            projectHeaderTitle.classList.toggle('activeTitle')
+            projectHeaderTitleCompleted.classList.toggle('activeTitle')
         });
         completedTaskIcon.setAttribute('src', completed);
 
@@ -61,7 +65,7 @@ function projectCreation() {
 
         projectWrapper.append(projectHeader, projectDivBox);
         projectHeader.append(projectHeaderContent);
-        projectHeaderContent.append(projectHeaderTitle, projectHeaderActions);
+        projectHeaderContent.append(projectHeaderTitle, projectHeaderTitleCompleted, projectHeaderActions);
         projectHeaderActions.append(addTaskIcon, completedTaskIcon);
         projectDivBox.append(itemOuterListContainer);
         itemOuterListContainer.append(itemOuterList);
@@ -70,37 +74,49 @@ function projectCreation() {
         outerItemSection.append(innerListContainer);
         innerListContainer.append(innerListToDo, innerListCompleted);
 
-        if (project._name === 'Inbox') {
-            document.querySelector('.mainInbox').appendChild(projectWrapper);
+        if (project._name === 'Agenda') {
+            document.querySelector('.mainAgenda').appendChild(projectWrapper);
+            projectHeaderTitle.setAttribute('id', 'projectHeaderTitleAgenda')
+            projectHeaderTitleCompleted.setAttribute('id', 'projectHeaderTitleAgendaCompleted')
+            innerListToDo.setAttribute('id', 'projectInnerListToDoAgenda');
+            innerListCompleted.setAttribute('id', 'projectInnerListCompletedAgenda');  
 
         } else if (project._name === 'Today') {
             document.querySelector('.mainToday').appendChild(projectWrapper);
+            projectHeaderTitle.setAttribute('id', 'projectHeaderTitleToday')
+            projectHeaderTitleCompleted.setAttribute('id', 'projectHeaderTitleTodayCompleted')
             innerListToDo.setAttribute('id', 'projectInnerListToDoToday');
             innerListCompleted.setAttribute('id', 'projectInnerListCompletedToday');  
             
         } else if (project._name === 'Upcoming') {
             document.querySelector('.mainUpcoming').appendChild(projectWrapper);
+            projectHeaderTitle.setAttribute('id', 'projectHeaderTitleUpcoming')
+            projectHeaderTitleCompleted.setAttribute('id', 'projectHeaderTitleUpcomingCompleted')
             innerListToDo.setAttribute('id', 'projectInnerListToDoUpcoming');
             innerListCompleted.setAttribute('id', 'projectInnerListCompletedUpcoming');  
         }
         
-        else if (project._name !== 'Inbox' && project._name !== 'Today' && project._name !== 'Upcoming') {
+        else if (project._name !== 'Agenda' && project._name !== 'Today' && project._name !== 'Upcoming') {
 
         const leftProject = HTMLcreator2('leftProject', 'div', 'leftProjectDiv', 'categoryDiv', project._name);
         leftProject.setAttribute('id', 'project' + project._id)
         leftProject.setAttribute('id', 'project' + project._id)
         leftProject.addEventListener('click', function () {
             let activeProjects = document.getElementsByClassName("activeProject");
-            let activeList = document.getElementsByClassName("activeProject");
+            let activeLists = document.getElementsByClassName("activeList");
+            let activeTitles = document.getElementsByClassName("activeTitle");
 
             while (activeProjects.length)
             activeProjects[0].classList.remove("activeProject");
-            while (activeList.length)
-            activeList[0].classList.remove("activeList");
+            while (activeLists.length)
+            activeLists[0].classList.remove("activeList");
+            while (activeTitles.length)
+            activeTitles[0].classList.remove("activeTitle");
 
             if (projectWrapper.classList.contains(leftProject.textContent)) {
                 projectWrapper.classList.add('activeProject');
                 innerListToDo.classList.add('activeList');
+                projectHeaderTitle.classList.add('activeTitle');
             }
         })
         const leftProjectInner = HTMLcreator2('leftProjectInner', 'div', 'leftProjectInner', 'categoryInnerDiv')
@@ -123,12 +139,38 @@ function projectCreation() {
 function taskCreation2() {
 
     projectList.forEach(project => project._projectTasks.forEach(function(task) {
-    document.querySelector('#projectInnerListToDo' + task._projectID).innerHTML = '';
-    document.querySelector('#projectInnerListCompleted' + task._projectID).innerHTML = ''; 
-    document.querySelector('#projectInnerListToDoToday').innerHTML = '';
-    document.querySelector('#projectInnerListCompletedToday').innerHTML = ''; 
-    document.querySelector('#projectInnerListToDoUpcoming').innerHTML = '';
-    document.querySelector('#projectInnerListCompletedUpcoming').innerHTML = ''; 
+        if (document.querySelector('#projectInnerListToDoAgenda') !== null) 
+            {
+            document.querySelector('#projectInnerListToDoAgenda').innerHTML = '';
+            } 
+        if (document.querySelector('#projectInnerListCompletedAgenda') !== null) 
+            {
+                document.querySelector('#projectInnerListCompletedAgenda').innerHTML = '';
+            }
+        if (document.querySelector('#projectInnerListToDo' + task._projectID) !== null) 
+            {
+                document.querySelector('#projectInnerListToDo' + task._projectID).innerHTML = '';
+            }
+        if (document.querySelector('#projectInnerListCompleted' + task._projectID) !== null) 
+            {
+                document.querySelector('#projectInnerListCompleted' + task._projectID).innerHTML = '';
+            }
+        if (document.querySelector('#projectInnerListToDoToday') !== null) 
+            {
+                document.querySelector('#projectInnerListToDoToday').innerHTML = '';
+            }
+        if (document.querySelector('#projectInnerListCompletedToday') !== null) 
+            {
+                document.querySelector('#projectInnerListCompletedToday').innerHTML = '';
+            }
+        if (document.querySelector('#projectInnerListToDoUpcoming') !== null) 
+            {
+                document.querySelector('#projectInnerListToDoUpcoming').innerHTML = '';
+            }
+        if (document.querySelector('#projectInnerListCompletedUpcoming') !== null) 
+            {
+                document.querySelector('#projectInnerListCompletedUpcoming').innerHTML = '';
+            }          
     }));
 
     projectList.forEach(project => project._projectTasks.forEach(function(task, project) {
@@ -234,15 +276,37 @@ function taskCreation2() {
             let nextDay6 = new Date((new Date()).valueOf() + ((1000*3600*24)*6)).toISOString().split('T')[0];
 
             if (task._dueDate == today) {
-               let innerListItemToday = innerListItem.cloneNode(true);
-                document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                let innerListItemToday = innerListItem.cloneNode(true);
+                if (document.querySelector('#projectInnerListToDo' + task._projectID) !== null) 
+                    {
+                    document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                    }
+                else if (document.querySelector('#projectInnerListToDoAgenda') !== null)
+                    {
+                    document.querySelector('#projectInnerListToDoAgenda').appendChild(innerListItem);
+                    }
                 document.querySelector('#projectInnerListToDoToday').appendChild(innerListItemToday);
             } else if (task._dueDate == nextDay1 || task._dueDate == nextDay2 || task._dueDate == nextDay3 || task._dueDate == nextDay4 || task._dueDate == nextDay5 || task._dueDate == nextDay6) {
                 let innerListItemUpcoming = innerListItem.cloneNode(true);
-                document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                if (document.querySelector('#projectInnerListToDo' + task._projectID) !== null) 
+                    {
+                    document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                    }
+                else if (document.querySelector('#projectInnerListToDoAgenda') !== null)
+                    {
+                    document.querySelector('#projectInnerListToDoAgenda').appendChild(innerListItem);
+                    }
                 document.querySelector('#projectInnerListToDoUpcoming').appendChild(innerListItemUpcoming);
             } else {
-                document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                if (document.querySelector('#projectInnerListToDo' + task._projectID) !== null) 
+                    {
+                    document.querySelector('#projectInnerListToDo' + task._projectID).appendChild(innerListItem);
+                    }
+                else if (document.querySelector('#projectInnerListToDoAgenda') !== null)
+                {
+                    document.querySelector('#projectInnerListToDoAgenda').appendChild(innerListItem);
+                }
+                
             }
 
         } else {
@@ -323,11 +387,37 @@ function taskCreation2() {
             let nextDay6 = new Date((new Date()).valueOf() + ((1000*3600*24)*6)).toISOString().split('T')[0];
 
             if (task._dueDate == today) {
-               let innerListItemToday = innerListItem.cloneNode(true);
-                document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);
+                let innerListItemToday = innerListItem.cloneNode(true);
+                if (document.querySelector('#projectInnerListCompleted' + task._projectID) !== null) 
+                    {
+                    document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);
+                    }
+                else if (document.querySelector('#projectInnerListCompletedAgenda') !== null)
+                    {
+                    document.querySelector('#projectInnerListCompletedAgenda').appendChild(innerListItem);
+                    }
                 document.querySelector('#projectInnerListCompletedToday').appendChild(innerListItemToday);
+            } else if (task._dueDate == nextDay1 || task._dueDate == nextDay2 || task._dueDate == nextDay3 || task._dueDate == nextDay4 || task._dueDate == nextDay5 || task._dueDate == nextDay6) {
+                let innerListItemUpcoming = innerListItem.cloneNode(true);
+                if (document.querySelector('#projectInnerListCompleted' + task._projectID) !== null) 
+                    {
+                    document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);
+                    }
+                else if (document.querySelector('#projectInnerListCompletedAgenda') !== null)
+                    {
+                    document.querySelector('#projectInnerListCompletedAgenda').appendChild(innerListItem);
+                    }
+                document.querySelector('#projectInnerListCompletedUpcoming').appendChild(innerListItemUpcoming);
             } else {
-                document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);
+                if (document.querySelector('#projectInnerListCompleted' + task._projectID) !== null) 
+                    {
+                    document.querySelector('#projectInnerListCompleted' + task._projectID).appendChild(innerListItem);
+                    }
+                else if (document.querySelector('#projectInnerListCompletedAgenda') !== null)
+                {
+                    document.querySelector('#projectInnerListCompletedAgenda').appendChild(innerListItem);
+                }
+                
             }    
         }
     }))

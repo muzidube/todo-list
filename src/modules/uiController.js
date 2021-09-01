@@ -21,6 +21,8 @@ import {
     formInput,
     taskFormInput1,
     taskFormInput2,
+    taskFormInput3,
+    taskFormInput4,
 } from './elementCreator';
 import { editTaskFormValues } from './tasks';
 
@@ -80,6 +82,8 @@ function taskItemPopup() {
     let isOpen = taskFormDiv.style.display = "block";
     taskFormInput1.value = '';
     taskFormInput2.value = '';
+    taskFormInput3.value = '';
+    taskFormInput4.value = '';
 
     if (isOpen == true) {
         taskFormDiv.style.display = "none";

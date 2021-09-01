@@ -51,6 +51,7 @@ body {
 header {
     background: #0e1e25;
     color: white;
+    height: 2rem;
 }
 
 .headerInner {
@@ -71,16 +72,6 @@ header {
     grid-template-columns: 40px 1fr 40px 40px;
 }
 
-.headerLogoLink {
-    height: 30px;
-    width: 30px;
-}
-
-.headerLogo {
-    height: 24px;
-    width: 24px;
-}
-
 .headerBtns {
     height: 30px;
     width: 30px;
@@ -88,10 +79,20 @@ header {
     border: none;
 }
 
+.headerLogoLink {
+    background-image: url(./components/images/ticked.svg);
+    height: 24px;
+    width: 24px;
+    -webkit-filter: invert(100%); /* Safari/Chrome */
+    filter: invert(100%);
+}
+
 .menuBtn {
     background-image: url(./components/images/menu.svg);
     height: 24px;
     width: 24px;
+    -webkit-filter: invert(100%); /* Safari/Chrome */
+    filter: invert(100%);
 }
 
 .newTaskBtn {
@@ -343,7 +344,7 @@ header {
     background: transparent;
     font-size: 14px;
     font-weight: 700;
-    color: #dd4b39;
+    color: #0e1e25;
     display: flex;
     flex: 1 1 auto;
     justify-content: center;
@@ -361,7 +362,7 @@ header {
     height: 1px;
     flex: 1 1 auto;
     opacity: .5;
-    background-color: #dd4b39;
+    background-color: #0e1e25;
 
 }
 
@@ -372,7 +373,7 @@ header {
     height: 1px;
     flex: 1 1 auto;
     opacity: .5;
-    background-color: #dd4b39;
+    background-color: #0e1e25;
 
 }
 
@@ -387,6 +388,14 @@ header {
 }
 
 .innerList.activeList {
+    display: block;
+}
+
+.projectHeaderTitle {
+    display: none;
+}
+
+.projectHeaderTitle.activeTitle {
     display: block;
 }
 
@@ -462,6 +471,11 @@ ul {
     border: none;
     margin-right: 10px;
     cursor: pointer;
+    opacity: 0;
+}
+
+.listItemContainer:hover > .listItemEditBtn {
+    opacity: 1;
 }
 
 .listItemDesc {
@@ -519,7 +533,7 @@ ul {
     width: 24px;
 }
 
-.mainInbox.active {
+.mainAgenda.active {
     display: grid;
 }
 

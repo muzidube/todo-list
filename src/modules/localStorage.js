@@ -1,4 +1,4 @@
-import { projectCreation, taskCreation, taskCreation2 } from "./creatorTest";
+import { projectCreation, projectCreation2, taskCreation, taskCreation2 } from "./creatorTest";
 
 function addToLocalStorage(taskList) {
     localStorage.setItem('taskList', JSON.stringify(taskList));
@@ -10,9 +10,14 @@ function addToLocalStorage1(projectList) {
     projectCreation(projectList);
 }
 
+function addToLocalStorage2(projectList) {
+    localStorage.setItem('projectList', JSON.stringify(projectList));
+}
+
 
 
 export {
     addToLocalStorage,
     addToLocalStorage1,
+    addToLocalStorage2,
 }

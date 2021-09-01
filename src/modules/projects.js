@@ -58,19 +58,20 @@ addBtn.addEventListener('click', function(e) {
       addProject(formInput.value);
   })
 
-const inbox = new Project ('Inbox');
+const agenda = new Project ('Agenda');
 const today = new Project ('Today');
 const upcoming = new Project ('Upcoming');
 
 projectList.push(upcoming);
 projectList.push(today);
-projectList.push(inbox);
+projectList.push(agenda);
 
 function addProject(name) {
       if (!name == '') {
           const newProject = new Project(name)
           projectList.push(newProject);
           addToLocalStorage1(projectList);
+          console.table(projectList);
       };
 };
 
@@ -82,8 +83,8 @@ function getFromLocalStorage() {
 }
   
 
-
-
   export {
       projectList,
+      getFromLocalStorage,
+      addToLocalStorage1,
   }

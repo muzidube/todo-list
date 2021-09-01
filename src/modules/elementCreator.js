@@ -8,7 +8,7 @@ function HTMLcreator(name, type, ...class1) {
 }
 
 import logo from '../components/images/correction.svg';
-import inbox from '../components/images/inbox.svg';
+import agenda from '../components/images/agenda.svg';
 import today from '../components/images/clock.svg';
 import upcoming from '../components/images/calendar.svg';
 import rightArrow from '../components/images/right-arrow.svg';
@@ -19,9 +19,9 @@ const headerContent = HTMLcreator('headerContent', 'div');
 const headerInner = HTMLcreator('headerInner', 'div');
 const leftNavContainer = HTMLcreator('leftNavContainer', 'div');
 const rightNavContainer = HTMLcreator('rightNavContainer', 'div');
-const headerLogoLink = HTMLcreator('headerLogo', 'a' );
-const headerLogo = HTMLcreator('headerLogo', 'img', 'logo')
-headerLogo.setAttribute('src', logo);
+const headerLogoLink = HTMLcreator('headerLogoLink', 'a' );
+const headerLogo = HTMLcreator('headerLogo', 'button', 'logo', 'headerBtns')
+//headerLogo.setAttribute('src', logo);
 const menuBtn = HTMLcreator('menuBtn', 'button', 'headerBtns');
 const headerSearchForm = HTMLcreator('headerSearchForm', 'form', 'searchForm');
 const headerSearchLabel = HTMLcreator('headerSearchLabel', 'label');
@@ -37,8 +37,8 @@ headerContent.append(headerInner);
 headerInner.append(leftNavContainer, rightNavContainer);
 leftNavContainer.append(headerLogoLink, menuBtn, headerSearchForm);
 headerLogoLink.append(headerLogo);
-rightNavContainer.append(newTaskBtn, totalTaskNum, notificationsBtn, accountBtn);
-headerSearchForm.append(headerSearchLabel, headerSearch);
+/*rightNavContainer.append(newTaskBtn, totalTaskNum, notificationsBtn, accountBtn);
+headerSearchForm.append(headerSearchLabel, headerSearch);*/
 
 const appContainer = HTMLcreator('appContainer', 'div');
 const appContent = HTMLcreator('appContent', 'div');
@@ -46,33 +46,49 @@ const leftMenu = HTMLcreator('leftMenu', 'div', 'active');
 const leftContent = HTMLcreator('leftContent', 'div');
 const leftModules = HTMLcreator('leftModules', 'div');
 const leftCategories = HTMLcreator('leftCategories', 'div');
-const leftInbox = HTMLcreator('leftInbox', 'div', 'categoryDiv', 'mainProject', 'Inbox');
+const leftAgenda = HTMLcreator('leftAgenda', 'div', 'categoryDiv', 'mainProject', 'agenda');
 
-leftInbox.addEventListener('click', function() {
+leftAgenda.addEventListener('click', function() {
     let activeProjects = document.getElementsByClassName("activeProject");
+    let activeLists = document.getElementsByClassName("activeList");
+    let activeTitles = document.getElementsByClassName("activeTitle");
+
     while (activeProjects.length)
     activeProjects[0].classList.remove("activeProject");
+    while (activeLists.length)
+    activeLists[0].classList.remove("activeList");
+    while (activeTitles.length)
+    activeTitles[0].classList.remove("activeTitle");
 
-    document.querySelector('.projectWrapper.Inbox').classList.add('activeProject');
-    document.querySelector('.innerList.Inbox').classList.add('activeList');
+    document.querySelector('.projectWrapper.Agenda').classList.add('activeProject');
+    document.querySelector('.innerList.Agenda').classList.add('activeList');
+    document.querySelector('#projectHeaderTitleAgenda').classList.add('activeTitle');
 
 })
 
-const inboxInnerDiv = HTMLcreator('inboxInnerDiv', 'div', 'categoryInnerDiv')
-const inboxIcon = HTMLcreator('inboxIcon', 'img', 'categoryIcon');
-inboxIcon.setAttribute('src', inbox);
-const inboxText = HTMLcreator('inboxText', 'p', 'categoryText');
-inboxText.textContent = 'Inbox';
-const inboxNum = HTMLcreator('inboxNum', 'p', 'categoryNum');
+const agendaInnerDiv = HTMLcreator('agendaInnerDiv', 'div', 'categoryInnerDiv')
+const agendaIcon = HTMLcreator('agendaIcon', 'img', 'categoryIcon');
+agendaIcon.setAttribute('src', agenda);
+const agendaText = HTMLcreator('agendaText', 'p', 'categoryText');
+agendaText.textContent = 'Agenda';
+const agendaNum = HTMLcreator('agendaNum', 'p', 'categoryNum');
 const leftToday = HTMLcreator('leftToday', 'div', 'categoryDiv', 'mainProject', 'Today');
 
 leftToday.addEventListener('click', function() {
     let activeProjects = document.getElementsByClassName("activeProject");
+    let activeLists = document.getElementsByClassName("activeList");
+    let activeTitles = document.getElementsByClassName("activeTitle");
+
     while (activeProjects.length)
     activeProjects[0].classList.remove("activeProject");
+    while (activeLists.length)
+    activeLists[0].classList.remove("activeList");
+    while (activeTitles.length)
+    activeTitles[0].classList.remove("activeTitle");
 
     document.querySelector('.projectWrapper.Today').classList.add('activeProject');
     document.querySelector('.innerList.Today').classList.add('activeList');
+    document.querySelector('#projectHeaderTitleToday').classList.add('activeTitle');
 
 })
 
@@ -86,11 +102,19 @@ const leftUpcoming = HTMLcreator('leftUpcoming', 'div', 'categoryDiv', 'mainProj
 
 leftUpcoming.addEventListener('click', function() {
     let activeProjects = document.getElementsByClassName("activeProject");
+    let activeLists = document.getElementsByClassName("activeList");
+    let activeTitles = document.getElementsByClassName("activeTitle");
+
     while (activeProjects.length)
     activeProjects[0].classList.remove("activeProject");
+    while (activeLists.length)
+    activeLists[0].classList.remove("activeList");
+    while (activeTitles.length)
+    activeTitles[0].classList.remove("activeTitle");
 
     document.querySelector('.projectWrapper.Upcoming').classList.add('activeProject');
     document.querySelector('.innerList.Upcoming').classList.add('activeList');
+    document.querySelector('#projectHeaderTitleUpcoming').classList.add('activeTitle');
 
 })
 
@@ -131,7 +155,7 @@ const projectItems = HTMLcreator('projectItems', 'div', 'projectItems--animated'
 projectItems.setAttribute('style', 'display: block');
 const mainSection = HTMLcreator('mainSection', 'div');
 const mainContent = HTMLcreator('mainContent', 'div');
-const mainInbox = HTMLcreator('mainInbox', 'div', 'projectContainers');
+const mainAgenda = HTMLcreator('mainAgenda', 'div', 'projectContainers');
 const mainToday = HTMLcreator('mainToday', 'div', 'projectContainers');
 const mainUpcoming = HTMLcreator('mainUpcoming', 'div', 'projectContainers');
 const mainProjects = HTMLcreator('mainProjects', 'div', 'projectContainers');
@@ -217,9 +241,9 @@ appContent.append(leftMenu, mainSection);
 leftMenu.append(leftContent);
 leftContent.append(leftModules);
 leftModules.append(leftCategories, projectCategory);
-leftCategories.append(leftInbox, leftToday, leftUpcoming);
-leftInbox.append(inboxInnerDiv, inboxNum);
-inboxInnerDiv.append(inboxIcon, inboxText);
+leftCategories.append(leftAgenda, leftToday, leftUpcoming);
+leftAgenda.append(agendaInnerDiv, agendaNum);
+agendaInnerDiv.append(agendaIcon, agendaText);
 leftToday.append(todayInnerDiv, todayNum);
 todayInnerDiv.append(todayIcon, todayText);
 leftUpcoming.append(upcomingInnerDiv, upcomingNum);
@@ -229,7 +253,7 @@ projectMain.append(projectHeader, projectItems);
 projectHeader.append(projectInnerDiv, addProjectIcon)
 projectInnerDiv.append(projectIcon, projectText);
 mainSection.append(mainContent);
-mainContent.append(mainInbox, mainToday, mainUpcoming, mainProjects);
+mainContent.append(mainAgenda, mainToday, mainUpcoming, mainProjects);
 
 projectFormDiv.append(projectForm);
 projectForm.append(formHeader, formLabel, formInput, formBtnsDiv);
@@ -254,9 +278,9 @@ export {
     menuBtn,
     appContent,
     leftMenu,
-    leftInbox,
+    leftAgenda,
     leftToday,
-    mainInbox,
+    mainAgenda,
     mainToday,
     mainUpcoming,
     projectMain,
